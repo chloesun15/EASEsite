@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="login.css">
+  <script src="register.js"></script>
+  <!-- <script type="text/javascript" src="userinfo.json"></script> -->
+
+</head>
+<body onload="OnStart();">
+  <form id='login' method='post' accept-charset='UTF-8' action="">
+  <fieldset >
+  <legend>Login</legend>
+  <input type='hidden' name='submitted' id='submitted' value='1'/>
+
+  <label for='username' >Username:</label>
+  <input type='text' name='username' id='username'  maxlength="50" />
+
+  <label for='password' >Password:</label>
+  <input type='password' name='password' id='password' maxlength="50" />
+
+
+  <button type='button' name='button' value='button' onclick="formChanged()">Login</button>
+<div id="status"></div>
+
+  </fieldset>
+  </form>
+</body>
+</html>
