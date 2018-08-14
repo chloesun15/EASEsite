@@ -1,15 +1,12 @@
 function OnStart(){
   alert("Hello world");
-  getList();
 }
 
-function CheckLog(user, pass){
-  var userName = ["kittykat", "user"];
-  var userPass = ["qwerty", "password"];
-  var arrayLength = userName.length;
+function CheckLog(user, pass, list){
+  var arrayLength = list.length;
   for (var i = 0; i < arrayLength; i++) {
-    if (user == userName[i]){
-      if (pass == userPass[i]){
+    if (user == list[i]["user"]){
+      if (pass == list[i]["pass"]){
         window.location.replace("homepage.html");
         break
       }else {
@@ -27,7 +24,8 @@ function CheckLog(user, pass){
 function formChanged(){
   var user = document.getElementsByName("username")[0].value;
   var pass = document.getElementsByName("password")[0].value;
-  CheckLog(user, pass)
+  var list = getList();
+  CheckLog(user, pass, list)
 }
 
 function registerChanged(){
@@ -35,6 +33,14 @@ function registerChanged(){
   var pass = document.getElementsByName("password")[0].value;
   var name = document.getElementsByName("name")[0].value;
   var email = document.getElementsByName("email")[0].value;
+  var list = getList();
+  var query = "https://api.myjson.com/bins/csi18";
+
+	// We create a request, send it, and get back the response
+	var userPass = new XMLHttpRequest();
+	userPass.open('POST', query, false);
+  userPass.push(list);
+  userPass.send();
 }
 
 function error(){
@@ -42,25 +48,20 @@ function error(){
 }
 
 function getList() {
-  alert("running!");
-	var query = "file:///C:/Users/Girls%20Who%20Code/Documents/GitHub/easewebsite/userinfo.json";
+	var query = "https://api.myjson.com/bins/csi18";
 
 	// We create a request, send it, and get back the response
 	var userPass = new XMLHttpRequest();
 	userPass.open('GET', query, false);
-	userPass.onreadystatechange = function()
-  {
-    if (userPass.readyState === 4)
-    {
-      if(userPass.status === 200 || userPass.status == 0)
-      {
-        var allText = userPass.responseText;
-        alert(allText);
-      }
-    }
-  userPass.send(null);
+  userPass.send();
+
+  // If there's an error, we'll bail out
+  if(userPass.readyState != 4 || userPass.status != 200 || userPass.responseText === "") {
+    window.console.error("Request had an error!");
+    return;
+  }
+
   // This takes the text response and creates a JSON object
-	var allAcc = JSON.parse(userPass.responseText);
-  alert(allAcc)
-}
+  var loginfo = JSON.parse(userPass.responseText);
+  return loginfo;
 }

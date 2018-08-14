@@ -1,1 +1,10 @@
-[{"kittykat":"qwerty"}{"user":"password"}]
+[
+  {
+    "user": "kittykat",
+    "pass":"qwerty"
+  },
+  {
+    "user": "password",
+    "pass":"username"  
+  }
+]
