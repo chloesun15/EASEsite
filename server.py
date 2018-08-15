@@ -54,5 +54,29 @@ def my_link2():
             else:
                 continue
 
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+@app.route('/chat/')
+def chat():
+    return render_template('chat.html')
+
+@app.route('/diary/')
+def diary():
+    return render_template('diary.html')
+    
+@app.route('/forum/')
+def forum():
+    return render_template('forum.html')
+
+@app.route('/resources/')
+def resources():
+    return render_template('resources.html')
+
+@app.route('/return/')
+def returnfx():
+    return render_template('homepage.html')
+
 if __name__ == '__main__':
   app.run(debug=True)
