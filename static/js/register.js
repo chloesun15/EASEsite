@@ -1,7 +1,3 @@
-function OnStart(){
-  alert("Hello world");
-}
-
 function CheckLog(user, pass, list){
   var arrayLength = list.length;
   for (var i = 0; i < arrayLength; i++) {
@@ -28,20 +24,6 @@ function formChanged(){
   CheckLog(user, pass, list)
 }
 
-function registerChanged(){
-  var user = document.getElementsByName("username")[0].value;
-  var pass = document.getElementsByName("password")[0].value;
-  var name = document.getElementsByName("name")[0].value;
-  var email = document.getElementsByName("email")[0].value;
-  var list = getList();
-  var query = "https://api.myjson.com/bins/csi18";
-
-	// We create a request, send it, and get back the response
-	var userPass = new XMLHttpRequest();
-	userPass.open('POST', query, false);
-  userPass.push(list);
-  userPass.send();
-}
 
 function error(){
   document.getElementById("status").innerHTML = "<p> Wrong username or password, try again! </p>"
