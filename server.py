@@ -17,6 +17,7 @@ def my_link():
       readFile.close()
   with open("userinfo.json", "w") as readFile:
       json.dump(dataList, readFile)
+  return render_template("/homepage.html/")
 
 if __name__ == '__main__':
   app.run(debug=True)
