@@ -4,20 +4,55 @@ import json
 
 app = Flask(__name__)
 
+@app.route ('/link1/')
+def link1():
+    return render_template ('register.html')
+
+@app.route('/link2/')
+def link2():
+    return render_template('index.html')
+
 @app.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('home.html')
 
 @app.route('/my-link/', methods=["GET", "POST"])
 def my_link():
-  tag = request.form['expression']
-  with open("userinfo.json", "r") as readFile:
-      dataList = json.load(readFile)
-      dataList.append(tag)
-      readFile.close()
-  with open("userinfo.json", "w") as readFile:
-      json.dump(dataList, readFile)
-  return render_template("/homepage.html/")
+    name1 = request.form['name']
+    email1 = request.form['email']
+    username1 = request.form['username']
+    password1 = request.form['password']
+    regInfo = {}
+    regInfo["name"] = name1
+    regInfo["email"] = email1
+    regInfo["username"] = username1
+    regInfo["password"] = password1
+    with open("userinfo.json", "r") as readFile:
+        dataList = json.load(readFile)
+        dataList.append(regInfo)
+        readFile.close()
+    with open("userinfo.json", "w") as readFile:
+        json.dump(dataList, readFile)
+    return render_template('index.html')
+
+@app.route('/my-link2/', methods=["GET", "POST"])
+def my_link2():
+    user1 = request.form["username"]
+    password1 = request.form["password"]
+    with open("userinfo.json", "r") as readFile:
+        dataList = json.load(readFile)
+        readFile.close()
+    listlength = len(dataList)
+    tries = 0
+    for i in dataList:
+        tries +=1
+        if i["username"] == user1 and i["password"] == password1:
+                return render_template('homepage.html')
+        else:
+            if tries == listlength:
+                return 'unsuccessful'
+            else:
+                continue
 
 if __name__ == '__main__':
   app.run(debug=True)

@@ -9,7 +9,7 @@ function navMenu(){
   "</h1>"+
   "<div class = \"navfloat\">"+
   "<ul>"+
-  // "<a href = \"link1.html\"> link1</a>"+
+  "<a href = \"https:\\google.com\"> link1</a>"+
   // "<a href = \"link2.html\"> link2</a>"+
   // "<a href = \"link3.html\"> link3 </a>"+
   "</ul>"+
