@@ -1,19 +1,21 @@
 from flask import Flask, render_template
 from flask import request
 import json
+import datetime
 
 app = Flask(__name__)
-
-@app.route ('/link1/')
-def link1():
-    return render_template('register.html')
-@app.route('/link2/')
-def link2():
-    return render_template('index.html')
 
 @app.route('/')
 def index():
   return render_template('home.html')
+
+@app.route ('/link1/')
+def link1():
+    return render_template('register.html')
+
+@app.route('/link2/')
+def link2():
+    return render_template('index.html')
 
 @app.route('/show/')
 def show():
@@ -24,15 +26,14 @@ def show():
       AllEntries.append(i)
   return render_template('lastdiary.html', AllEntries = AllEntries)
 
-@app.route('/my-link/', methods=["GET", "POST"])
+@app.route('/register/', methods=["GET", "POST"])
 def my_link():
     name1 = request.form['name']
     email1 = request.form['email']
     username1 = request.form['username']
     password1 = request.form['password']
     if (name1 == "") or (email1 == "") or (username1 == "") or (password1 == ""):
-        FALSE = 0
-        return render_template('register.html', validity = FALSE)
+        return render_template('register.html', validity = 0)
     regInfo = {}
     regInfo["name"] = name1
     regInfo["email"] = email1
@@ -46,7 +47,7 @@ def my_link():
         json.dump(dataList, readFile)
     return render_template('index.html')
 
-@app.route('/my-link2/', methods=["GET", "POST"])
+@app.route('/login/', methods=["GET", "POST"])
 def my_link2():
     user1 = request.form["username"]
     password1 = request.form["password"]
@@ -61,8 +62,7 @@ def my_link2():
                 return render_template('homepage.html')
         else:
             if tries == listlength:
-                FALSE = 0;
-                return render_template('index.html', validity = FALSE)
+                return render_template('index.html', validity = 0)
             else:
                 continue
 
@@ -96,12 +96,15 @@ def backfx():
 
 @app.route('/save/', methods=["GET", "POST"])
 def save():
+    entry={}
     diary = request.form['diary']
-    inbetween= "/new/diary/entry/s1i39rjjd92ndf04m5"
+    now = datetime.datetime.now()
+    dot=now.strftime("%Y-%M-%d %H:%M")
+    entry["date"]=dot
+    entry["diary"] = diary
     with open("diary.json", "r") as readFile:
         dataList = json.load(readFile)
-        dataList.append(diary)
-        dataList.append(inbetween)
+        dataList.append(entry)
         readFile.close()
     with open("diary.json", "w") as readFile:
         json.dump(dataList, readFile)

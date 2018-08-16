@@ -9,6 +9,17 @@
 body{
   background-color: #A09DF9;
 }
+
+.diarybox{
+  color: black;
+  border: 1px solid black;
+  padding: 40px 30px;
+  width: 400px;
+  height:auto;
+  margin:auto;
+  margin-top: 30px;
+}
+
 </style>
 </head>
 
@@ -16,19 +27,28 @@ body{
   <div id="google_translate_element"></div>
   <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <div id="navMenu"></div>
+  <div id="entries"></div>
+  <script>
+    var someJavaScriptVar =  {{AllEntries|tojson}};
+    var diaryentries = [];
+    jsonlen=Object.keys(someJavaScriptVar).length;
+    for (var i = 0; i < jsonlen; i++){
+      diaryentries.push(someJavaScriptVar[i])
+    }
+    printitems(jsonlen, diaryentries);
 
-    <div id="entries"></div>
+    function printitems(jsonlen, diaryentries){
+      entries ="";
+      for (var i=0; i<jsonlen; i++){
+        newentry = "<div class=\"diarybox\">" + "<h3> Diary entry from "+ diaryentries[i]["date"] + ":</h3>" + diaryentries[i]["diary"] + "</div>";
+        entries += newentry;
+      }
+      document.getElementById("entries").innerHTML = entries;
+      }
+  </script>
 
-    <script>
-      var someJavaScriptVar = '{{ AllEntries }}';
-      someJavaScriptVar = someJavaScriptVar.replace("[", "");
-      someJavaScriptVar = someJavaScriptVar.replace("]", "");
-      someJavaScriptVar = someJavaScriptVar.replace(/&#39;/g, "");
-      list = someJavaScriptVar.split(", \"/new/diary/entry/s1i39rjjd92ndf04m5\",")
-      alert(list);
-      // someJavaScriptVar = someJavaScriptVar.replace(/,/g, "<br> <br>");
-      document.getElementById("entries").innerHTML = list;
-    </script>
+
   </main>
 <footer></footer>
 

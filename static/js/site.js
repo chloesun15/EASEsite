@@ -7,7 +7,7 @@ function navMenu(){
   document.getElementById("navMenu").innerHTML =
   "<div class = \"navfloat\">"+
   "<ul>"+
-  "<a href = \" /about/ \"> about </a>"+
+  "<a href = \" /about/ \"> about us </a>"+
   "<a href = \"/chat/\"> chat</a>"+
   "<a href = \"/diary/\"> diary</a>"+
   "<a href = \"/forum/\"> forum </a>"+
