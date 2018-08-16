@@ -3,50 +3,52 @@
 
 <head>
   <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
-</head>
-<body onload="OnStart();">
-    <form action="/my-link2/" method="post">
-      <legend>Login</legend>
-      <input type='hidden' name='submitted' id='submitted' value='1'/>
+  <script src="../static/js/site.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
 
+  $(document).ready(function() {
+      $('#password').on('keypress', function(e) {
+          if (e.which == 32)
+              return false;
+    });
+    $('#username').on('keypress', function(e) {
+        if (e.which == 32)
+            return false;
+    });
+  });
+
+  </script>
+
+</head>
+<body onload="start();">
+  <div id="google_translate_element"></div>
+  <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <div class="navfloat">
+    <a id="left" href="/back/">return</a>
+  </div>
+    <form action="/my-link2/" method="post">
+      <legend>Log In</legend>
+      <input type='hidden' name='submitted' id='submitted' value='1'/>
       <label for='username' >Username:</label>
-      <input type='text' name='username' id='username'  maxlength="50" />
+      <input type='text' name='username' id='username' maxlength="50" />
 
       <label for='password' >Password:</label>
       <input type='password' name='password' id='password' maxlength="50" />
 
-      <input type='submit' name='submit' value='submit' id='submit'>
-
-      <div id="status"></div>
+      <input type='submit' name='submit' value='Log In' id='submit'>
 
     </form>
+      <div  style = "color: red;" id="valid"></div>
 
-  <!-- <form id='login' method='post' accept-charset='UTF-8' action="/my-link/">
-  <fieldset >
-  <legend>Login</legend>
-  <input type='hidden' name='submitted' id='submitted' value='1'/>
-
-  <label for='username' >Username:</label>
-  <input type='text' name='username' id='username'  maxlength="50" />
-
-  <label for='password' >Password:</label>
-  <input type='password' name='password' id='password' maxlength="50" />
-
-  <input type='submit' name='submit' value='submit' id='submit'>
-
-<div id="status"></div>
-
-  </fieldset>
-  </form>
-  <script>
-  var input = document.getElementById("login");
-  input.addEventListener("keyup",
-  function(event){
-    event.preventDefault();
-    if(event.keyCode===13){
-      document.getElementById("button").click();
+    <script>
+    var validInput;
+    validInput = {{ validity }};
+    if (validInput == 0){
+      document.getElementById("valid").innerHTML = "Invalid username or password!";
     }
-  });
-  </script> -->
+    </script>
 </body>
 </html>

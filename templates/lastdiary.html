@@ -13,28 +13,22 @@ body{
 </head>
 
 <body onload="start()">
-  <div name="lastEntry">
-  </div>
-
-  <div class="navfloat">
-    <a id="left" href="/return/">return</a>
-  </div>
   <div id="google_translate_element"></div>
   <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  <h1 style ="text-align:center; font-size:70px; text-decoration:none;">Diary</h1>
-  <main>
+    <div id="entries"></div>
 
-    <div id="navMenu"></div>
-
-    <form action="/save/" method="post" style="display:inline">
-      <textarea name='diary' id='name' rows=30 cols=150 style='margin-left:30px; margin-top: 30px;'></textarea>
-      <input type='submit' value='save and exit'>
-    </form>
-    <form action="/show/" style='display:inline'>
-      <input type='submit' value='See past entries'>
-    </form>
+    <script>
+      var someJavaScriptVar = '{{ AllEntries }}';
+      someJavaScriptVar = someJavaScriptVar.replace("[", "");
+      someJavaScriptVar = someJavaScriptVar.replace("]", "");
+      someJavaScriptVar = someJavaScriptVar.replace(/&#39;/g, "");
+      list = someJavaScriptVar.split(", \"/new/diary/entry/s1i39rjjd92ndf04m5\",")
+      alert(list);
+      // someJavaScriptVar = someJavaScriptVar.replace(/,/g, "<br> <br>");
+      document.getElementById("entries").innerHTML = list;
+    </script>
   </main>
 <footer></footer>
 

@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html>
 <html lang="en-US">
 
 <head>
-    <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
+  <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
+  <script src="../static/js/site.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <title> EASE </title>
+  <script>
+
+  $(document).ready(function() {
+      $('#password').on('keypress', function(e) {
+          if (e.which == 32)
+              return false;
+    });
+    $('#username').on('keypress', function(e) {
+        if (e.which == 32)
+            return false;
+    });
+  });
+
+  </script>
+
 </head>
-<body>
-  <h1> Registration Form</h1>
-  <form action="/my-link/" method="post">
-  <label for='name' >Your Full Name*: </label>
-  <input type='text' name='name' id='name' maxlength="50" />
-  <label for='email' >Email Address*:</label>
-  <input type='text' name='email' id='email' maxlength="50" />
-  <label for='username' >UserName*:</label>
-  <input type='text' name='username' id='username' maxlength="50" />
-  <label for='password' >Password*:</label>
-  <input type='password' name='password' id='password' maxlength="50" />
-  <input type='submit' value='Register'>
-  </form>
+<body onload="start();">
+  <div class="navfloat">
+    <a id="left" href="/back/">return</a>
+    <div id="google_translate_element"></div>
+    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+  </div>
 
+    <form action="/my-link/" method="post">
+      <legend>Registration</legend>
+      <input type='hidden' name='submitted' id='submitted' value='1'/>
 
+      <label for='name' >Your Full Name*: </label>
+      <input type='text' name='name' id='name' maxlength="50" />
+
+      <label for='email' >Email Address:</label>
+      <input type='type' name='email' id='email' maxlength="50" />
+
+      <label for='username' >Username:</label>
+      <input type='text' name='username' id='username' maxlength="50" />
+
+      <label for='password' >Password:</label>
+      <input type='password' name='password' id='password' maxlength="50" />
+
+      <input type='submit' name='submit' value='Register' id='submit'>
+
+    </form>
+      <div  style = "color: red;" id="valid"></div>
+    <script>
+
+    var validInput;
+    validInput = {{ validity }};
+    if (validInput == 0){
+      document.getElementById("valid").innerHTML = "You must complete all items in the form!";
+    }
+    </script>
 </body>
 </html>
