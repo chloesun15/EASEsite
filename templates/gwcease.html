@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EX</title>
+
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB7O68QPOlBcJMdpAyW9SlhwETXGcz3U3M",
+    authDomain: "gwcease.firebaseapp.com",
+    databaseURL: "https://gwcease.firebaseio.com",
+    projectId: "gwcease",
+    storageBucket: "gwcease.appspot.com",
+    messagingSenderId: "1092876770518"
+  };
+  firebase.initializeApp(config);
+</script>
+
+</head>
+<body>
+Name: <input type = "text" id="name">
+<br>
+Message: <input type = "text" id="message">
+<br>
+<button onclick = "uploadData();">Submit!</button>
+</body>
+
+<script>
+
+const database = firebase.database().ref()
+
+const nameElement = document.querySelector("#name");
+const messageElement = document.querySelector("#message");
+
+function uploadData(){
+  const name= nameElement.value;
+  const message = messageElement.value;
+  const data = [name, message];
+  database.push(data);
+}
+
+function receiveData(data){
+  const value = data.val();
+  //Diplaying the text on website
+  document.getElementById("log").innerHTML += "<br>"+value[0]+" : "+ value[1];
+  //printing the array
+  console.log (value);
+}
+
+database.on("child_added", receiveData);
+
+</script>
+
+<div id="log"></div>
+
+</html>
