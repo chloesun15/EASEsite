@@ -2,14 +2,69 @@
 <html lang= "en_US">
 
 <head>
-    <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
+  <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
   <script src="../static/js/site.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+  body {
+    height: 100%;
+    background-image: url("https://s8.postimg.cc/ujgcctm4l/background.jpg");
+    padding: 25px;
+    background-position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+</style>
+<script>
+
+$(document).ready(function() {
+  $('#password').on('keypress', function(e) {
+    if (e.which == 32)
+    return false;
+  });
+  $('#username').on('keypress', function(e) {
+    if (e.which == 32)
+    return false;
+  });
+});
+
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
 </head>
 <body id="trans" onload="start()">
+  <div id="google_translate_element"></div>
+  <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <h1 style ="text-align:center; font-size:70px; text-decoration:none;">Welcome</h1>
+
+
+  <!-- <a href ="/link2/">Log in </a> -->
+  <body onload="start();">
+    <form action="/login/" method="post">
+      <h3><legend>Log In</legend></h3>
+
+      <input type='hidden' name='submitted' id='submitted' value='1'/>
+      <label for='username' >Username:</label>
+      <input type='text' name='username' id='username' maxlength="50" />
+
+      <label for='password' >Password:</label>
+      <input type='password' name='password' id='password' maxlength="50" />
+
+      <input type='submit' name='submit' value='Log In' id='submit'>
+
+    </form>
+    <div  style = "color: red;" id="valid"></div>
+
+    <script>
+    var validInput;
+    validInput = {{ validity }};
+    if (validInput == 0){
+      document.getElementById("valid").innerHTML = "Invalid username or password!";
+    }
+    </script>
     <a href="/link1/"> Register </a>
-    <a href ="/link2/">Log in </a>
-    <div id="google_translate_element"></div>
-    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</body>
-</html>
+
+  </body>
+  </html>

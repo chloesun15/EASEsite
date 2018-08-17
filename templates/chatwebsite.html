@@ -115,7 +115,6 @@
     // When the user presses enter on the message input, write the message to firebase.
     $("#messageInput").keypress(function (e) {
       if (e.keyCode == 13) {
-        alert("submitting!")
         var name = username;
         var text = $("#messageInput").val();
         $("#messageInput").val("");
