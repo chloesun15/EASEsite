@@ -1,26 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FORUM</title>
+  <title>DIARY</title>
   <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
   <script src="../static/js/site.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
+<style>
+body{
+  background-color: #A09DF9;
+}
+  .diarybox{
+    color: black;
+    border: 1px solid black;
+    padding: 10px 10px;
+    background-color: rgb(255, 255, 255, 0.5);
+    width: 400px;
+    height:auto;
+    margin:auto;
+    margin-top: 10px;
+  }
+
+</style>
 </head>
 
 <body onload="start()">
+  <div id="logout"></div>
+
+  <div name="lastEntry">
+  </div>
+
   <div class="navfloat">
     <a id="left" href="/return/">return</a>
     <div id="logout"></div>
   </div>
+
   <div id="google_translate_element"></div>
   <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <h1 style ="text-align:center; font-size:70px; text-decoration:none;">Forum</h1>
   <main>
+
     <div id="navMenu"></div>
-    <div>
-    </main>
-    <footer></footer>
-  </body>
-  </html>
+
+    <div id="entries"></div>
+
+    <form action="/saveforum/" method="post" style="display:inline; margin:auto;">
+      <textarea name='entry' id='entry' rows=10 cols=100 style='margin-left:30px; margin-top: 30px;'></textarea>
+      <input type='submit' value='save and exit'>
+    </form>
+  </main>
+  <script>
+  var someJavaScriptVar =  {{allPosts|tojson}};
+  var allentries = [];
+  jsonlen=Object.keys(someJavaScriptVar).length;
+  for (var i = 0; i < jsonlen; i++){
+    allentries.push(someJavaScriptVar[i])
+  }
+  printitems(allentries);
+
+  function printitems(forumentries){
+    entries ="";
+    var length = forumentries.length;
+    for (var i = 0; i<length; i++){
+      newentry = "<div class=\"diarybox\">" + "<h3> Post on "+ forumentries[i]["date"] + " by " + forumentries[i]["username"] + ":</h3>" + forumentries[i]["entry"] + "</div>";
+      entries += newentry;
+    }
+    document.getElementById("entries").innerHTML = entries;
+    }
+    </script>
+<footer></footer>
+
+</body>
+</html>

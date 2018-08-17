@@ -98,7 +98,9 @@ def diary():
 
 @app.route('/forum/')
 def forum():
-    return render_template('forum.html')
+    with open("forumposts.json","r") as readFile:
+        allPosts = json.load(readFile)
+    return render_template('forum.html', allPosts = allPosts)
 
 @app.route('/resources/')
 def resources():
@@ -132,6 +134,28 @@ def save():
         json.dump(dataList, readFile)
         readFile.close()
     return render_template('diary.html')
+
+
+@app.route('/saveforum/', methods=["GET", "POST"])
+def saveforum():
+    userentry={}
+    entry = request.form['entry']
+    now = datetime.datetime.now()
+    dot=now.strftime("%Y-%M-%d %H:%M")
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    userentry["date"]=dot
+    userentry["entry"] = entry
+    userentry["username"] = username
+    with open("forumposts.json", "r") as readFile:
+        diaryList = json.load(readFile)
+        diaryList.append(userentry)
+    with open("forumposts.json", "w") as readFile:
+        json.dump(diaryList, readFile)
+    with open("forumposts.json","r") as readFile:
+        allPosts = json.load(readFile)
+    return render_template('forum.html', allPosts = allPosts)
 
 if __name__ == '__main__':
   app.run(debug=True)
