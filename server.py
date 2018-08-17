@@ -9,6 +9,10 @@ app = Flask(__name__)
 def index():
   return render_template('home.html')
 
+@app.route('/logout/', methods = ["GET", "POST"])
+def logout():
+  return render_template('home.html')
+
 @app.route ('/link1/')
 def link1():
     return render_template('register.html')

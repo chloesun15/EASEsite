@@ -1,6 +1,6 @@
 function start(){
-  alert("Running!")
   navMenu();
+  logout();
 }
 
 
@@ -17,6 +17,12 @@ function navMenu(){
   "</div>";
 }
 
+function logout(){
+  document.getElementById("logout").innerHTML =
+  "<form action=\"/logout/\" method=\"post\">"+
+    "<button class=\"btn logout\">Logout</button>"+
+  "</form>";
+}
 
 function redirect()
 {
