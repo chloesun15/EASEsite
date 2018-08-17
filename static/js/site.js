@@ -1,4 +1,5 @@
 function start(){
+  alert("Running!")
   navMenu();
 }
 

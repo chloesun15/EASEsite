@@ -19,12 +19,15 @@ def link2():
 
 @app.route('/show/')
 def show():
+  with open("currentuser.json", "r") as readFile:
+    current = json.load(readFile)
+  username = current[0]["user"]
   with open("diary.json", "r") as readFile:
       dataList=json.load(readFile)
   AllEntries = []
   for i in dataList:
       AllEntries.append(i)
-  return render_template('lastdiary.html', AllEntries = AllEntries)
+  return render_template('lastdiary.html', AllEntries = AllEntries, username = username)
 
 @app.route('/register/', methods=["GET", "POST"])
 def my_link():
@@ -41,8 +44,10 @@ def my_link():
     regInfo["password"] = password1
     with open("userinfo.json", "r") as readFile:
         dataList = json.load(readFile)
-        dataList.append(regInfo)
-        readFile.close()
+    for i in dataList:
+        if i["username"] == regInfo["username"]:
+            return render_template('register.html', validity = 1)
+    dataList.append(regInfo)
     with open("userinfo.json", "w") as readFile:
         json.dump(dataList, readFile)
     return render_template('index.html')
@@ -54,15 +59,21 @@ def my_link2():
     with open("userinfo.json", "r") as readFile:
         dataList = json.load(readFile)
         readFile.close()
+    with open("currentuser.json","r") as readFile:
+        user= json.load(readFile)
+        readFile.close()
     listlength = len(dataList)
     tries = 0
     for i in dataList:
         tries +=1
         if i["username"] == user1 and i["password"] == password1:
-                return render_template('homepage.html')
+            user[0]["user"] = user1
+            with open ("currentuser.json", "w") as readFile:
+                json.dump(user, readFile)
+            return render_template('homepage.html', username = user1)
         else:
             if tries == listlength:
-                return render_template('index.html', validity = 0)
+                return render_template('home.html', validity = 0)
             else:
                 continue
 
@@ -72,9 +83,12 @@ def about():
 
 @app.route('/chat/')
 def chat():
-    return render_template('chat.html')
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    return render_template('chatwebsite.html', username = username)
 
-@app.route('/diary/')
+@app.route('/diary/', methods=["GET", "POST"])
 def diary():
     return render_template('diary.html')
 
@@ -100,8 +114,12 @@ def save():
     diary = request.form['diary']
     now = datetime.datetime.now()
     dot=now.strftime("%Y-%M-%d %H:%M")
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
     entry["date"]=dot
     entry["diary"] = diary
+    entry["username"] = username
     with open("diary.json", "r") as readFile:
         dataList = json.load(readFile)
         dataList.append(entry)

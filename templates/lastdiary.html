@@ -31,17 +31,25 @@ body{
   <div id="entries"></div>
   <script>
     var someJavaScriptVar =  {{AllEntries|tojson}};
-    var diaryentries = [];
+    var username = "{{username}}";
+    var allentries = [];
     jsonlen=Object.keys(someJavaScriptVar).length;
     for (var i = 0; i < jsonlen; i++){
-      diaryentries.push(someJavaScriptVar[i])
+      allentries.push(someJavaScriptVar[i])
     }
-    printitems(jsonlen, diaryentries);
+    var diaryentries = [];
+    for (var i=0; i<jsonlen; i++){
+      if (allentries[i]["username"] == username){
+        diaryentries.push(allentries[i])
+      }
+    }
+    printitems(diaryentries);
 
-    function printitems(jsonlen, diaryentries){
+    function printitems(diaryentries){
       entries ="";
-      for (var i=0; i<jsonlen; i++){
-        newentry = "<div class=\"diarybox\">" + "<h3> Diary entry from "+ diaryentries[i]["date"] + ":</h3>" + diaryentries[i]["diary"] + "</div>";
+      var length = diaryentries.length;
+      for (var i=length-1; i>=0; i--){
+        newentry = "<div class=\"diarybox\">" + "<h3> Diary entry from "+ diaryentries[i]["date"] + " by " + diaryentries[i]["username"] + ":</h3>" + diaryentries[i]["diary"] + "</div>";
         entries += newentry;
       }
       document.getElementById("entries").innerHTML = entries;
