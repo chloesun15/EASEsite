@@ -19,9 +19,7 @@ function navMenu(){
 
 function logout(){
   document.getElementById("logout").innerHTML =
-  "<form action=\"/logout/\" method=\"post\">"+
-    "<button class=\"btn logout\">Logout</button>"+
-  "</form>";
+  "<a id = \"right\" href=\"/logout/\">logout</a>";
 }
 
 function redirect()

@@ -125,6 +125,11 @@ h2{
     font-size: 20px;
     text-align:left;
     font-family: "Forum"
+    border: none;
+    background-color: #AAB7B8;
+    border-radius: 8px;
+    padding: 2%;
+    margin-bottom: 1%;
   }
   .slide{
     width:50%;
@@ -143,29 +148,4 @@ h2{
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
-  }
-
-  .btn span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  .btn span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-
-  .btn:hover span {
-    padding-right: 25px;
-  }
-
-  .btn:hover span:after {
-    opacity: 1;
-    right: 0;
   }

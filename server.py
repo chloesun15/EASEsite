@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
   return render_template('home.html')
 
-@app.route('/logout/', methods = ["GET", "POST"])
+@app.route('/logout/')
 def logout():
   return render_template('home.html')
 

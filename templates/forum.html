@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
 <style>
 body{
-  background-color: #A09DF9;
+    background-color: rgba(221,221,221,0.3);
 }
   .diarybox{
     color: black;
@@ -20,6 +20,16 @@ body{
     margin-top: 10px;
   }
 
+  #entries{
+    background-color: white;
+    width: 700px;
+    height:300px;
+    border: 4px solid #424547;
+    padding: 25px;
+    margin: 25px;
+    overflow: auto;
+  }
+
 </style>
 </head>
 
@@ -29,7 +39,7 @@ body{
 
   <div class="navfloat">
     <a id="left" href="/return/">return</a>
-    <div id="logout"></div>
+    <a id = "right" href="/logout/">logout</a>
   </div>
 
   <div id="google_translate_element"></div>
@@ -61,7 +71,7 @@ body{
     entries ="";
     var length = forumentries.length;
     for (var i = 0; i<length; i++){
-      newentry = "<div class=\"diarybox\">" + "<h3> Post on "+ forumentries[i]["date"] + " by " + forumentries[i]["username"] + ":</h3>" + forumentries[i]["entry"] + "</div>";
+      newentry = "<div class=\"diarybox\">" + "<h3>" + forumentries[i]["entry"] + "</h3> Post on "+ forumentries[i]["date"] + " by " + forumentries[i]["username"] + "</div>";
       entries += newentry;
     }
     document.getElementById("entries").innerHTML = entries;
