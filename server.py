@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask import request
 import json
 import datetime
+import smtplib
 
 app = Flask(__name__)
 
@@ -21,6 +22,9 @@ def link1():
 def link2():
     return render_template('index.html')
 
+@app.route ('/forgot/')
+def forgot():
+    return render_template('forgotpass.html')
 @app.route('/show/')
 def show():
   with open("currentuser.json", "r") as readFile:
@@ -55,6 +59,52 @@ def my_link():
     with open("userinfo.json", "w") as readFile:
         json.dump(dataList, readFile)
     return render_template('home.html')
+
+@app.route('/getsurvey/')
+def getsurvey():
+    return render_template('survey.html')
+
+@app.route('/surveysubmit/', methods=["GET", "POST"])
+def collectsurvey():
+    q1 = request.form['text1']
+    q2 = request.form['text2']
+    q3 = request.form['text3']
+    q4 = request.form['text4']
+    answers = {}
+    answers["q1"] = q1
+    answers["q2"] = q2
+    answers["q3"] = q3
+    answers["q4"] = q4
+    with open ("survey.json", "r") as readFile:
+        dataList = json.load(readFile)
+    dataList.append(answers)
+    with open("survey.json", "w") as readFile:
+        json.dump(dataList, readFile)
+    return render_template('homepage.html')
+
+@app.route('/forgotpass/', methods=["GET", "POST"])
+def forgotpass():
+    email1 = request.form['email']
+    username1 = request.form['username']
+    if (email1 == "") or (username1 == ""):
+        return render_template('register.html', validity = 0)
+    regInfo = {}
+    regInfo["email"] = email1
+    regInfo["username"] = username1
+    with open("userinfo.json", "r") as readFile:
+        dataList = json.load(readFile)
+    for i in dataList:
+        if (i["username"] == regInfo["username"]) and (i["email"] == regInfo["email"]):
+            return render_template('forgotpass.html', validity = 1)
+        else:
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            s.login("easewebsitegwc@gmail.com", "EaseWeb246!")
+            message = "Here is your password:" + i["password"]
+            s.sendmail("easewebsitegwc@gmail.com", i["email"], message)
+            s.quit()
+            return "Check your email!"
+
 
 @app.route('/login/', methods=["GET", "POST"])
 def my_link2():
