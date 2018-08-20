@@ -8,42 +8,78 @@
   <style>
   body {
     height: 100%;
-    background-image: url("https://s8.postimg.cc/ujgcctm4l/background.jpg");
+    background-image: url("https://institutolook.com.br/wp-content/uploads/2017/09/background-purple.png");
+    /* https://s8.postimg.cc/ujgcctm4l/background.jpg"); */
     padding: 25px;
-    background-position: relative;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: right top;
   }
-}
-</style>
-<script>
 
-$(document).ready(function() {
-  $('#password').on('keypress', function(e) {
-    if (e.which == 32)
-    return false;
-  });
-  $('#username').on('keypress', function(e) {
-    if (e.which == 32)
-    return false;
-  });
-});
+    .container {
+      padding: 25px;
+      background-color: white;
+      width: 50%;
+      position: absolute;
+      left: 335px;
+      top: center;
+    }
+    * {
+      box-sizing: border-box;
+      color: #020657;
+      text-align: center;
+    }
+    input[type=text], input[type=password] {
+      width: 80%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #d1d1e0;
 
-</script>
+    }
 
-<link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    #corner{
+      text-align: left;
+      text-decoration-color: white;
+    }
+    </style>
+    <script>
+
+    $(document).ready(function() {
+      $('#password').on('keypress', function(e) {
+        if (e.which == 32)
+        return false;
+      });
+      $('#username').on('keypress', function(e) {
+        if (e.which == 32)
+        return false;
+      });
+    });
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
 </head>
-<body id="trans" onload="start()">
+<!-- <body id="trans" onload="start()"> -->
+
+
+
+<!-- <a href ="/link2/">Log in </a> -->
+<body onload="start();">
   <div id="google_translate_element"></div>
   <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <h1 style ="text-align:center; font-size:70px; text-decoration:none;">Welcome</h1>
-
-
-  <!-- <a href ="/link2/">Log in </a> -->
-  <body onload="start();">
-    <form action="/login/" method="post">
-      <h3><legend>Log In</legend></h3>
+  <h1 style ="text-align:center; font-size:70px; text-shadow: 2px 2px 5px #020657; color: white; text-decoration:none;">Welcome to EASE</h1>
+<main>
+  <form action="/login/" method="post">
+    <div class="container">
+      <h3><b><legend>Log In</legend></b></h3>
 
       <input type='hidden' name='submitted' id='submitted' value='1'/>
       <label for='username' >Username:</label>
@@ -51,20 +87,22 @@ $(document).ready(function() {
 
       <label for='password' >Password:</label>
       <input type='password' name='password' id='password' maxlength="50" />
-
+      <div  style = "color: red;" id="valid"></div>
       <input type='submit' name='submit' value='Log In' id='submit'>
+      <a href="/link1/"> Register </a>
 
-    </form>
-    <div  style = "color: red;" id="valid"></div>
+    </div>
+  </form>
+</main>
 
-    <script>
-    var validInput;
-    validInput = {{ validity }};
-    if (validInput == 0){
-      document.getElementById("valid").innerHTML = "Invalid username or password!";
-    }
-    </script>
-    <a href="/link1/"> Register </a>
 
-  </body>
-  </html>
+<script>
+var validInput;
+validInput = {{ validity }};
+if (validInput == 0){
+  document.getElementById("valid").innerHTML = "Invalid username or password!";
+}
+</script>
+
+</body>
+</html>

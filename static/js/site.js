@@ -17,11 +17,6 @@ function navMenu(){
   "</div>";
 }
 
-function logout(){
-  document.getElementById("logout").innerHTML =
-  "<a id = \"right\" href=\"/logout/\">logout</a>";
-}
-
 function redirect()
 {
   var url = "http://www.google.com";

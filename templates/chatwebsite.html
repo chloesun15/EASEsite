@@ -30,7 +30,12 @@
 
     <style>
     body{
-      background-color: rgba(221,221,221,0.3);
+      /* background-color: rgba(221,221,221,0.3); */
+      background-image: url("http://static.tumblr.com/5uvtpxx/Dzlmplaee/light__4_.png");
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right top;
     }
     h1 {
       font-size: 36px;
@@ -65,6 +70,7 @@
       font-weight: bold;
       color: red;
     }
+
     /* Chat */
     #messagesDiv {
       /* background-color: white;
@@ -118,7 +124,7 @@
       <a id="left" href="/return/">return</a>
       <a id = "right" href="/logout/">logout</a>
     </div>
-    <h1 style ="text-align:center;font-family: Sacramento; font-size:70px; text-decoration:none;">Chat</h1>
+    <h1 style ="text-align:center;font-family: Sacramento;color:black; font-size:70px; text-decoration:none;">Chat with <ul id=" "style="text-shadow: 2px 2px 5px black; color: darkred" >EASE</ul></h1>
     <main>
       <div id="navMenu"></div>
       <div>
@@ -146,15 +152,21 @@
         var name = username;
         var text = $("#messageInput").val();
         $("#messageInput").val("");
-        database.push({name:name, text:text});
+        database.push({name:name, text:text, time: Firebase.ServerValue.TIMESTAMP});
       }
     });
 
+time = function(timestamp){
+  var epoch = new Date(timestamp);
+  var date = epoch.toUTCString();
+  return date;
+}
     // Add a callback that is triggered for each chat message.
     messagesRef.limitToLast(10).on("child_added", function (snapshot) {
       var message = snapshot.val();
+      var t = time(message.time);
       $("<div/>").text(message.text).prepend($("<em/>")
-        .text(message.name + ": ")).appendTo($("#messagesDiv"));
+        .text(t + " " + message.name + ": ")).appendTo($("#messagesDiv"));
       $("#messagesDiv")[0].scrollTop = $("#messagesDiv")[0].scrollHeight;
     });
   });

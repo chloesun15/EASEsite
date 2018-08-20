@@ -5,36 +5,67 @@
   <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
   <script src="../static/js/site.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
-<style>
-body{
-    background-color: rgba(221,221,221,0.3);
+  <style>
+  body{
+    /* background-color: rgba(221,221,221,0.3); */
+    background-image: url("http://static.tumblr.com/5uvtpxx/Dzlmplaee/light__4_.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;}
   }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid grey;
+    border-radius: 8px;
+    position:relative;
+}
+.button1:hover {
+    background-color: darkblue;
+    color: white;
+}
+
 </style>
 </head>
+  <body onload="start()">
+    <div id="google_translate_element"></div>
+    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<body onload="start()">
-  <div id="google_translate_element"></div>
-  <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <div class="navfloat">
+      <a id="left" href="/return/">return</a>
+      <a id = "right" href="/logout/">logout</a>
+    </div>
+    <h1 style ="text-align:center;font-size:70px; text-decoration:none;font-family:Sacramento">Diary</h1>
+    <main>
 
-  <div class="navfloat">
-    <a id="left" href="/return/">return</a>
-    <a id = "right" href="/logout/">logout</a>
-  </div>
-  <h1 style ="text-align:center;font-size:70px; text-decoration:none;font-family:Sacramento">About</h1>
-  <main>
+      <div id="navMenu"></div>
+      <form action="/show/" style='display:inline'>
+        <input class="button button1" type='submit' value='See past entries'>
+      </form>
+      <form action="/save/" method="post" >
+        <textarea name='diary' id='name' rows=30 cols=100 style='margin-left:20%; position: relative; margin-top: 30px;'></textarea>
+        <input class="button button1" type='submit' value='save and exit'>
+      </form>
 
-    <div id="navMenu"></div>
+    </main>
+    <footer></footer>
 
-    <form action="/save/" method="post" style="display:inline">
-      <textarea name='diary' id='name' rows=30 cols=150 style='margin-left:30px; margin-top: 30px;'></textarea>
-      <input type='submit' value='save and exit'>
-    </form>
-    <form action="/show/" style='display:inline'>
-      <input type='submit' value='See past entries'>
-    </form>
-  </main>
-<footer></footer>
-
-</body>
-</html>
+  </body>
+  </html>

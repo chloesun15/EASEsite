@@ -5,60 +5,126 @@
   <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
   <script src="../static/js/site.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Forum|Raleway|Sacramento" rel="stylesheet">
+
+  <style>
+  body{
+    background-image: url("http://static.tumblr.com/5uvtpxx/Dzlmplaee/light__4_.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;}
+
+  .container {
+    padding: 25px;
+    background-color: white;
+    width: 50%;
+    position: absolute;
+    left: 335px;
+    top: center;
+    }* {
+      box-sizing: border-box;
+      color: purple;
+      text-align: center;
+    }
+    .top-left {
+      font-size: 35px;
+      font-family: "Times New Roman";
+      position: absolute;
+      top: 3px;
+      right: 700px;
+      color: white;
+
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #d1d1e0;
+
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 20px;
+    }
+    .registerb {
+      background-color: purple;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      opacity: 1;
+    }
+    .registerb:hover {
+      opacity: 0.5;
+    }
+
+    </style>
+      <script>
+
+      $(document).ready(function() {
+        $('#password').on('keypress', function(e) {
+          if (e.which == 32)
+          return false;
+        });
+        $('#username').on('keypress', function(e) {
+          if (e.which == 32)
+          return false;
+        });
+      });
+
+      </script>
+    </head>
+    <body onload="start();">
+      <div class="navfloat">
+        <div id="google_translate_element"></div>
+        <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <a id="left" href="/back/">return</a>
+        <div id="logout"></div>
+      </div>
+
+      <h1 style ="text-align:center;font-size:70px; text-decoration:none;font-family:Sacramento">Registration</h1>
+
+<p></p>
+      <form action="/register/" method="post"  class="pure-form" text-align:"center">
+        <div class="container">
+          <input type='hidden' name='submitted' id='submitted' value='1'/>
+
+          <label for='name'><b> Name:</b> </label>
+          <input type='text'placeholder="Enter a nickname" name='name' id='name'/>
+
+          <label for='email'><b>Email Address:</b></label>
+          <input type='text' placeholder="Enter Email" name='email' id='email' />
+<p></p>
+          <label for='username'><b>Username:</b></label>
+          <input type='text' placeholder="Enter username" name='username' id='username' />
+
+          <label for='password'><b>Password:</b></label>
+          <input type='password' placeholder="Enter Password" name='password' id='password'/>
+
+          <input type='submit' name='submit' value='Register' id='submit'>
+          <div  style = "color: red;" id="valid"></div>
+        </div>
+      </form>
 
   <script>
-
-  $(document).ready(function() {
-      $('#password').on('keypress', function(e) {
-          if (e.which == 32)
-              return false;
-    });
-    $('#username').on('keypress', function(e) {
-        if (e.which == 32)
-            return false;
-    });
-  });
-
-  </script>
-</head>
-<body onload="start();">
-  <div class="navfloat">
-    <a id="left" href="/back/">return</a>
-    <div id="google_translate_element"></div>
-    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <a id = "right" href="/logout/">logout</a>
-  </div>
-
-    <form action="/register/" method="post">
-      <legend>Registration</legend>
-      <input type='hidden' name='submitted' id='submitted' value='1'/>
-
-      <label for='name' >Your Full Name*: </label>
-      <input type='text' name='name' id='name' maxlength="50" />
-
-      <label for='email' >Email Address:</label>
-      <input type='type' name='email' id='email' maxlength="50" />
-
-      <label for='username' >Username:</label>
-      <input type='text' name='username' id='username' maxlength="50" />
-
-      <label for='password' >Password:</label>
-      <input type='password' name='password' id='password' maxlength="50" />
-
-      <input type='submit' name='submit' value='Register' id='submit'>
-
-    </form>
-      <div  style = "color: red;" id="valid"></div>
-    <script>
-
-    var validInput;
-    validInput = {{ validity }};
-    if (validInput == 0){
-      document.getElementById("valid").innerHTML = "You must complete all items in the form!";
-    }else if (validInput == 1){
-      document.getElementById("valid").innerHTML = "Username taken!";
-    }
-    </script>
-</body>
-</html>
+      var validInput;
+      validInput = {{ validity }};
+      if (validInput == 0){
+        document.getElementById("valid").innerHTML = "You must complete all items in the form!";}
+      else if (validInput == 1){
+        document.getElementById("valid").innerHTML = "Username taken!";
+      }
+      </script>
+    </body>
+    </html>

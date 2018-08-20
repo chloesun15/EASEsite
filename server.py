@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
   return render_template('home.html')
 
-@app.route('/logout/')
+@app.route('/logout/', methods = ["GET", "POST"])
 def logout():
   return render_template('home.html')
 
@@ -54,7 +54,7 @@ def my_link():
     dataList.append(regInfo)
     with open("userinfo.json", "w") as readFile:
         json.dump(dataList, readFile)
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/login/', methods=["GET", "POST"])
 def my_link2():
@@ -119,7 +119,7 @@ def save():
     entry={}
     diary = request.form['diary']
     now = datetime.datetime.now()
-    dot=now.strftime("%Y-%M-%d %H:%M")
+    dot=now.strftime("%Y-%m-%d %H:%M")
     with open("currentuser.json", "r") as readFile:
         current = json.load(readFile)
     username = current[0]["user"]
@@ -141,7 +141,7 @@ def saveforum():
     userentry={}
     entry = request.form['entry']
     now = datetime.datetime.now()
-    dot=now.strftime("%Y-%M-%d %H:%M")
+    dot=now.strftime("%Y-%m-%d %H:%M")
     with open("currentuser.json", "r") as readFile:
         current = json.load(readFile)
     username = current[0]["user"]
