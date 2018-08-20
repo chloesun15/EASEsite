@@ -162,10 +162,13 @@
     });
 
     time = function(timestamp){
-    var epoch = new Date(timestamp);
-    var date = epoch.toUTCString();
-    date = date.toLocaleString()
-    return date;
+      var epoch = new Date(timestamp);
+      var date = epoch.toUTCString();
+      date = date.toLocaleString();
+      var myDate = new Date (date);
+      myDate = myDate.toLocaleString();
+      myDate = myDate.replace(",", "");
+      return myDate;
     }
 
     // Add a callback that is triggered for each chat message.
