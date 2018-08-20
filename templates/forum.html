@@ -4,6 +4,7 @@
   <title>DIARY</title>
   <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
   <script src="../static/js/site.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
 <style>
 body{
@@ -18,25 +19,28 @@ body{
 }
   .diarybox{
     color: black;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 10px 10px;
-    background-color: rgb(255, 255, 255, 0.5);
+    /* background-color: rgb(255, 255, 255, 0.5);
     width: 400px;
     height:auto;
-    margin:auto;
+    margin:auto; */
     margin-top: 10px;
   }
 
-  #entries{
+  #container{
     background-color: white;
-    width: 700px;
-    height:300px;
-    border: 4px solid #424547;
-    padding: 25px;
-    margin: 25px;
+    max-height: 2000px;
+    width: 1000px;
+    /* border: 4px solid #424547; */
+    margin:auto;
     overflow: auto;
   }
 
+  #entryarea {
+    margin:auto;
+    padding: 0px;
+  }
 </style>
 </head>
 
@@ -57,13 +61,16 @@ body{
   <main>
 
     <div id="navMenu"></div>
-
+<div id="container">
     <div id="entries"></div>
 
-    <form action="/saveforum/" method="post" style="display:inline; margin:auto;">
-      <textarea name='entry' id='entry' rows=10 cols=100 style='margin-left:30px; margin-top: 30px;'></textarea>
-      <input type='submit' value='save and exit'>
+    <form action="/saveforum/" method="post" id="entryarea">
+      <textarea name='entry' id='entry' rows=10 cols=100 style='margin-left:20%; position: relative; margin-top: 30px;'></textarea>
+      <br>
+      <input style="text-align: center;" type='submit' value='save'>
     </form>
+
+</div>
   </main>
   <script>
   var someJavaScriptVar =  {{allPosts|tojson}};
@@ -78,7 +85,7 @@ body{
     entries ="";
     var length = forumentries.length;
     for (var i = 0; i<length; i++){
-      newentry = "<div class=\"diarybox\">" + "<h3>" + forumentries[i]["entry"] + "</h3> Post on "+ forumentries[i]["date"] + " by " + forumentries[i]["username"] + "</div>";
+      newentry = "<div class=\"diarybox\">" + "<h3>" + forumentries[i]["entry"] + "</h3> Post on "+ forumentries[i]["date"] + " by " + forumentries[i]["username"] + "</div><hr>";
       entries += newentry;
     }
     document.getElementById("entries").innerHTML = entries;

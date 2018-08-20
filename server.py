@@ -147,6 +147,7 @@ def backfx():
 def save():
     entry={}
     diary = request.form['diary']
+    diary = diary.replace("\r\n", "<br>")
     now = datetime.datetime.now()
     dot=now.strftime("%Y-%m-%d %H:%M")
     with open("currentuser.json", "r") as readFile:
@@ -169,6 +170,7 @@ def save():
 def saveforum():
     userentry={}
     entry = request.form['entry']
+    entry = entry.replace("\r\n", "<br>")
     now = datetime.datetime.now()
     dot=now.strftime("%Y-%m-%d %H:%M")
     with open("currentuser.json", "r") as readFile:
