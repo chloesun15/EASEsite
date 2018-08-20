@@ -41,6 +41,32 @@ body{
     margin:auto;
     padding: 0px;
   }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid grey;
+    border-radius: 8px;
+    position:relative;
+}
+.button1:hover {
+    background-color: darkblue;
+    color: white;
+}
 </style>
 </head>
 
@@ -67,7 +93,7 @@ body{
     <form action="/saveforum/" method="post" id="entryarea">
       <textarea name='entry' id='entry' rows=10 cols=100 style='margin-left:20%; position: relative; margin-top: 30px;'></textarea>
       <br>
-      <input style="text-align: center;" type='submit' value='save'>
+      <input class="button button1" style="text-align: right;" type='submit' value='save'>
     </form>
 
 </div>
