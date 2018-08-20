@@ -10,7 +10,13 @@ function navMenu(){
   "<ul>"+
   "<a href = \" /about/ \"> about us </a>"+
   "<a href = \"/chat/\"> chat</a>"+
-  "<a href = \"/diary/\"> diary</a>"+
+  "<div class=\"dropdown\">"+
+  "<a class= \"dropdown\"> diary</a>"+
+      "<div class=\"dropdown-content\">"+
+        "<a href=\"/diary/\">diary</a>"+
+        "<a href=\"/show/\">archive</a>"+
+      "</div>"+
+    "</div>"+
   "<a href = \"/forum/\"> forum </a>"+
   "<a href = \"/resources/\"> resources </a>"+
   "</ul>"+
