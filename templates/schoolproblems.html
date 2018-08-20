@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <title>Chat</title>
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyB0V4fqOFChrPLYjM-Umgyxdi3nA2n9Ttw",
+        authDomain: "schoolchat-ff2b3.firebaseapp.com",
+        databaseURL: "https://schoolchat-ff2b3.firebaseio.com",
+        projectId: "schoolchat-ff2b3",
+        storageBucket: "schoolchat-ff2b3.appspot.com",
+        messagingSenderId: "532646249792"
+      };
+      firebase.initializeApp(config);
+</script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="../static/js/site.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel= "stylesheet" type= "text/css" href= "../static/styles/site.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
+
+    <style>
+    body{
+      /* background-color: rgba(221,221,221,0.3); */
+      background-image: url("http://static.tumblr.com/5uvtpxx/Dzlmplaee/light__4_.png");
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right top;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #424547;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #424547;
+    }
+
+    p {
+     font-size: 16px;
+    }
+
+    input {
+      font-size: 24px;
+    }
+
+    input[type=text] {
+      color: black;
+      border: 1px solid #c2c2c2;
+      background-color: white;
+      padding-top: 2px;
+    }
+
+    em {
+      font-style: normal;
+      font-weight: bold;
+      color: red;
+    }
+    /* Chat */
+    #messagesDiv {
+      /* background-color: white;
+      overflow: auto;
+      height: 300px;
+      width: 80%;
+      padding: 15px;
+      border: 2px solid #424547;
+      margin: 5px;
+      text-align: left; */
+      background-color: white;
+      width: 700px;
+      height:300px;
+      border: 4px solid #424547;
+      padding: 25px;
+      margin: 25px;
+    }
+
+    #nameInput {
+      align-items: center;
+      width:30%;
+    }
+    #input{
+      display:inline;
+        /* float: center;
+        /* width: 100%; */
+        /* padding:2px;
+        width: 500px;
+        margin: auto auto; */
+        /* padding-left: 8px; */
+        /* padding-right: 6px; */
+    }
+    #messageInput {
+      align-items: center;
+      margin:0px 252px;
+      width: 60%;
+      rows:1000;
+        }
+
+      #date {
+        color:red;
+        float:right;
+      }
+
+    </style>
+
+
+  </head>
+
+  <body onload="start();">
+    <div id="google_translate_element"></div>
+    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <div class="navfloat">
+      <a id="left" href="/return/">return</a>
+      <div id="logout"></div>
+    </div>
+    <h1 style ="text-align:center;font-family: Sacramento; font-size:70px; text-decoration:none;">Chat</h1>
+    <main>
+      <div id="navMenu"></div>
+      <div>
+    <p> </p>
+    <div id="messagesDiv" style="margin: 0 auto"></div>
+
+    <div id="input">
+      <h1><div id="myuser" style="color:blue"> </div></h1>
+      <input type="text" id="messageInput" placeholder="Start typing..." />
+    </div>
+
+<script>
+
+  var username = "{{username}}";
+  document.getElementById("myuser").innerHTML = username + ":";
+
+  $(function() {
+    // Get a reference to the root of the chat data.
+    var messagesRef = new Firebase("https://schoolchat-ff2b3.firebaseio.com/");
+    let database = firebase.database().ref();
+
+    // When the user presses enter on the message input, write the message to firebase.
+    $("#messageInput").keypress(function (e) {
+      if (e.keyCode == 13) {
+        var name = username;
+        var text = $("#messageInput").val();
+        $("#messageInput").val("");
+        database.push({name:name, text:text, time: Firebase.ServerValue.TIMESTAMP});
+      }
+    });
+
+    time = function(timestamp){
+      var epoch = new Date(timestamp);
+      var date = epoch.toUTCString();
+      date = date.toLocaleString()
+      return date;
+    }
+
+    // Add a callback that is triggered for each chat message.
+    messagesRef.limitToLast(10).on("child_added", function (snapshot) {
+      var message = snapshot.val();
+      var t = time(message.time);
+      $("<div id=\"date\">").text(t).appendTo($("#messagesDiv"));
+      $("<div/>").text(message.text).prepend($("<em/>").text(message.name + ": ")).appendTo($("#messagesDiv"));
+      $("#messagesDiv")[0].scrollTop = $("#messagesDiv")[0].scrollHeight;
+    });
+  });
+
+</script>
+  </body>
+</html>

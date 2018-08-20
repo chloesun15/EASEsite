@@ -85,12 +85,41 @@ def my_link2():
 def about():
     return render_template('about.html')
 
-@app.route('/chat/')
-def chat():
+@app.route('/mentalhealth/')
+def mentalhealth():
     with open("currentuser.json", "r") as readFile:
         current = json.load(readFile)
     username = current[0]["user"]
-    return render_template('chatwebsite.html', username = username)
+    return render_template('mentalhealth.html', username = username)
+@app.route('/family/')
+def family():
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    return render_template('familyissues.html', username = username)
+@app.route('/random/')
+def random():
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    return render_template('randomchat.html', username = username)
+@app.route('/school/')
+def school():
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    return render_template('schoolproblems.html', username = username)
+@app.route('/relationship/')
+def relationship():
+    with open("currentuser.json", "r") as readFile:
+        current = json.load(readFile)
+    username = current[0]["user"]
+    return render_template('relationshipproblems.html', username = username)
+
+
+@app.route('/chat/')
+def chat():
+    return render_template('chat.html')
 
 @app.route('/diary/', methods=["GET", "POST"])
 def diary():
