@@ -6,13 +6,41 @@
     <title>CHAT</title>
   <style>
   body{
-    background-color: rgba(221,221,221,0.3);
-  }
+    /* background-color: rgba(221,221,221,0.3);} */
+    background-image: url("http://static.tumblr.com/5uvtpxx/Dzlmplaee/light__4_.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right top;}
+
+    .choices {
+      list-style: none;
+      text-align:center;
+    }
+    .choices a {
+      display: block;
+      text-decoration:none;
+      padding: 30px ;
+      font-size:30px;
+      font-family:"Raleway";
+
+    }
+    .choices a:hover{
+      background-color: #98ABCA;
+      opacity:0.2;
+      /* 425d89; */
+    }
+
+    }
   </style>
   <link href="https://fonts.googleapis.com/css?family=Raleway|Sacramento" rel="stylesheet">
 </head>
 
 <body onload="start()">
+  <div id="google_translate_element"></div>
+  <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <main>
     <div class="navfloat">
       <h2 id="left">
@@ -21,9 +49,6 @@
       <a id="right" href="/return/">return</a>
       <div id="logout"></div>
     </div>
-    <div id="google_translate_element"></div>
-    <script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');}</script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
     <h3 style ="text-align:center;font-size:40px">

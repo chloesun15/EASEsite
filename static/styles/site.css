@@ -72,11 +72,11 @@ h2{
   }
 /* About page css */
   .column {
-    float: right;
-    width: 25%;
+    /* float: right;
+    width: 20%;
     padding:2px;
-    /* padding-left: 3px; */
-    padding-right: 3px;
+    padding-left: 3px;
+    padding-right: 3px; */
   }
   /* Clearfix (clear floats) */
   .row::after {
