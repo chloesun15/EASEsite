@@ -62,7 +62,7 @@ button {
       entries ="";
       var length = diaryentries.length;
       for (var i=length-1; i>=0; i--){
-        newentry = "<button onclick=\"showDiv(" + i + ")\">" + "Entry from " + diaryentries[i]["date"]+ "</button><div class=\"diarybox\" id=\"" + i + "\">" + "<h3> Diary entry from "+ diaryentries[i]["date"] + " by " + diaryentries[i]["username"] + ":</h3>" + diaryentries[i]["diary"] + "</div>" + "<br>";
+        newentry = "<button onclick=\"showDiv(" + i + ")\">" + "Entry from " + diaryentries[i]["date"]+ "</button><div style=\"display:none;\" class=\"diarybox\" id=\"" + i + "\">" + "<h3> Diary entry from "+ diaryentries[i]["date"] + " by " + diaryentries[i]["username"] + ":</h3>" + diaryentries[i]["diary"] + "</div>" + "<br>";
         entries += newentry;
       }
       document.getElementById("entries").innerHTML = entries;

@@ -95,16 +95,15 @@ def forgotpass():
         dataList = json.load(readFile)
     for i in dataList:
         if (i["username"] == regInfo["username"]) and (i["email"] == regInfo["email"]):
-            return render_template('forgotpass.html', validity = 1)
-        else:
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.starttls()
             s.login("easewebsitegwc@gmail.com", "EaseWeb246!")
-            message = "Here is your password:" + i["password"]
+            message = i["password"]
             s.sendmail("easewebsitegwc@gmail.com", i["email"], message)
             s.quit()
             return "Check your email!"
-
+        else:
+            return render_template('forgotpass.html', validity = 1)
 
 @app.route('/login/', methods=["GET", "POST"])
 def my_link2():
