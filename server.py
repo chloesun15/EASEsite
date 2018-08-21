@@ -3,6 +3,7 @@ from flask import request
 import json
 import datetime
 import smtplib
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
@@ -98,8 +99,11 @@ def forgotpass():
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.starttls()
             s.login("easewebsitegwc@gmail.com", "EaseWeb246!")
-            message = i["password"]
-            s.sendmail("easewebsitegwc@gmail.com", i["email"], message)
+            message = MIMEText("\n Hi " +i["name"] + "! \r\n Your password is " + i["password"])
+            message['Subject'] = 'Ease Password Recovery'
+            message['From'] = 'Ease'
+            message['To'] = i["name"]
+            s.sendmail("easewebsitegwc@gmail.com", i["email"], message.as_string())
             s.quit()
             return "Check your email!"
         else:

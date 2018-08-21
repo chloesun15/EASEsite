@@ -15,11 +15,11 @@ function navMenu(){
       "<div class=\"dropdown-content\">"+
         "<a href=\"/diary/\">diary</a>"+
         "<a href=\"/show/\">archive</a>"+
-        "<a href=\"/getsurvey/\"> survey<a>"+
       "</div>"+
     "</div>"+
   "<a href = \"/forum/\"> forum </a>"+
   "<a href = \"/resources/\"> resources </a>"+
+  "<a href=\"/getsurvey/\"> survey<a>"+
   "</ul>"+
   "</div>";
 }
